@@ -149,6 +149,10 @@ static void init_deck(struct tile deck[TILE_COUNT])
 		deck[ind++] = make_tile((enum edge[5])
 			{GAMETRAIL, LAKE, LAKE, LAKE, LAKE}, PREY); // Crocodile
 
+	for (int i = 0; i < 2; ++i)
+		deck[ind++] = make_tile((enum edge[5])
+			{LAKE, GAMETRAIL, LAKE, GAMETRAIL, GAMETRAIL}, NONE);
+
 	assert(ind == TILE_COUNT);
 	return;
 }
