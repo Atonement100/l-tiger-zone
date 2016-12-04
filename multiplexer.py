@@ -118,13 +118,33 @@ def matchStart(sockObj, buf, clientSocks):
 	print message
 	return buf, numtiles
 	
-def matchOver(sockObj, buf):
+def matchOver(sockObj, buf, clients):
 	#Server: GAME <gid> OVER PLAYER <pid> <score> PLAYER <pid> <score>
 	message, buf = better_recv(sockObj, buf)
 	print message
+	str = "GAME "
+	str += str(clients[0].gameid)
+	str += " OVER PLAYER "
+	str += str(clients[0].pid[0])
+	str += " "
+	str += str(clients[0].score[0])
+	str += " PLAYER "
+	str += str(clients[1].pid[1])
+	str += " "
+	str += str(clients[1].score[1])
 
 	#Server: GAME <gid> OVER PLAYER <pid> <score> PLAYER <pid> <score>
 	message, buf = better_recv(sockObj, buf)
+	str = "GAME "
+	str += str(clients[0].gameid)
+	str += " OVER PLAYER "
+	str += str(clients[0].pid[0])
+	str += " "
+	str += str(clients[0].score[0])
+	str += " PLAYER "
+	str += str(clients[1].pid[1])
+	str += " "
+	str += str(clients[1].score[1])
 	print message
         return buf	
 
@@ -284,7 +304,7 @@ for a in range (0, matches):
         IdList = []
         for c in range (0, numtiles):
             buf = move(s, buf, clients, IdList, first)
-        buf = matchOver(s, buf)
+        buf = matchOver(s, buf, clients)
     buf = roundOver(s, buf)
 buf = challengeOver(s, buf)
 buf = tournamentOver(s, buf)
